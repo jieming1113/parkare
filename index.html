@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pose Fitness Demo</title>
+
+  <!-- ===============================
+       Import Map（关键）
+       =============================== -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js"
+    }
+  }
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    /* 整个屏幕 */
+    #container {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* 摄像头全屏容器 */
+    #video-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 摄像头视频 + 骨骼画布 */
+    video,
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Start 按钮 */
+    #startBtn {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 10;
+      padding: 10px 14px;
+      font-size: 16px;
+    }
+
+    /* ===============================
+       3D avatar 浮动窗口
+       =============================== */
+    #three-container {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: 40vw;
+      max-width: 180px;
+      height: 40vw;
+      max-height: 180px;
+
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      overflow: hidden;
+
+      z-index: 5;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+
+    <div id="video-container">
+      <button id="startBtn">Start</button>
+
+      <!-- 摄像头 -->
+      <video id="video" autoplay playsinline></video>
+
+      <!-- 骨骼 -->
+      <canvas id="canvas"></canvas>
+
+      <!-- 3D avatar（浮动） -->
+      <div id="three-container"></div>
+    </div>
+
+  </div>
+
+  <!-- ===============================
+       MediaPipe Pose（普通 script）
+       =============================== -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+
+  <!-- ===============================
+       主逻辑（ES Module）
+       =============================== -->
+  <script type="module" src="main.js"></script>
+
+</body>
+</html>
